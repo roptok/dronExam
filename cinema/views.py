@@ -13,7 +13,7 @@ from .serializers import SessionSerializer, TicketSerializer
 @api_view(['GET'])
 def get_sessions(request: Request) -> Response:
     now = datetime.now()
-    sessions = Session.objects.filter(date__gt=now)
+    sessions = Session.objects.filter()
     session = sessions.first()
     serializer = SessionSerializer(session)
     return Response(serializer.data, status.HTTP_200_OK)
