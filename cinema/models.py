@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
@@ -23,7 +24,7 @@ class Movie(models.Model):
 
 
 class Session(models.Model):
-    date = models.DateTimeField()
+    sessionDate = models.DateTimeField(default=datetime.datetime.now, db_column="session_date")
     price = models.IntegerField()
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 

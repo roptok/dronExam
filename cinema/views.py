@@ -23,7 +23,7 @@ def get_sessions(request: Request) -> Response:
     # получаем текущее время
     now = datetime.now()
     # получаем все сеансы, которые пройдут в будущем
-    sessions = Session.objects.filter()
+    sessions = Session.objects.all()
     # сериализуем и возвращаем в ответе
     serializer = SessionSerializer(sessions, many=True)
     return Response(serializer.data, status.HTTP_200_OK)
