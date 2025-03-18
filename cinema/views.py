@@ -74,3 +74,18 @@ def anon_auth(request: Request) -> Response:
         'username': username,
         'password': password
     })
+
+# патч метод юзаем когда нужно обновить часть полей существующего объекта
+# в нашем случае юзера
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def user_info(request: Request) -> Response:
+    # мы не предусматриваем удаление этих параметров. Поэтому мы проставляем новые параметры только если они переданы
+    age = request.data.get("age")
+    phone = request.data.get("phone")
+    if age and type(age) == str:
+        request.user.age = age
+    if phone and type(phone) == int:
+        request.user.phone = phone
+    request.user.save()
+    return Response()
